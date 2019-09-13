@@ -1,13 +1,12 @@
 ﻿#include<stdio.h>
 #include<string.h>
-#include<conio.h>
 #include<stdlib.h>
 
 
 typedef struct PlaylistElements {
 	// elementos da playlist
 	char songname[200];
-	float songtime;
+	int songtime;
 };
 
 
@@ -21,7 +20,7 @@ int menu() {
 	printf("4.Sair\n");
 	printf("Digite sua escolha: ");
 
-	scanf_s("%d", &op);
+	scanf_s("%d", &op, 1);
 	while ((c = getchar()) != '\n' && c != EOF) {} // limpando o buffer.
 
 	system("Cls");
@@ -30,27 +29,27 @@ int menu() {
 
 
 struct PlaylistElements reqSongs() {
-
+	int c;
 	// temp structure
 	struct PlaylistElements tpe;
-	malloc(sizeof(PlaylistElements));
+	
+	//malloc(sizeof(PlaylistElements));
 
 	printf("Enter song name: \n");
-	scanf_s("%s", tpe.songname);
+	scanf_s("%s", &tpe.songname, 200);
+	while ((c = getchar()) != '\n' && c != EOF) {} // sempre limpe o buffer do teclado.
 
 	printf("Enter song time: \n");
-	scanf_s("%f", tpe.songtime);
+	scanf_s("%d", &tpe.songtime, 16);
+	while ((c = getchar()) != '\n' && c != EOF) {} // sempre limpe o buffer do teclado.
 
 	return tpe;
 };
 
 void listSongs(struct PlaylistElements tpe) {
-	printf(" Song name: %s\n", tpe.songname);
-	printf(" Song time: %f\n", tpe.songtime);
+	printf(" Song name: %s \n", &tpe.songname);
+	printf(" Song time: %d \n", &tpe.songtime);
 };
-
-
-// function declaration
 
 
 int main () {
@@ -59,6 +58,7 @@ int main () {
 
 	//creating the struct array var
 	struct PlaylistElements playlist[6];
+	
 
 	while (1) {
 
@@ -78,6 +78,13 @@ int main () {
 		case 2:
 			// case para remover
 
+			printf("Digite o numero da musica que deseja apagar: ");
+			scanf_s("%d", i);
+			playlist[i].songname = "";
+			playlist[i].songtime = 0;
+			
+
+
 			break;
 
 		case 3:
@@ -86,6 +93,7 @@ int main () {
 				printf("\n Song #%d : \n", (i + 1));
 				listSongs(playlist[i]);
 			};
+			system("PAUSE");
 			break;
 
 		case 4:
