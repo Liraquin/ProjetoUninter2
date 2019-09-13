@@ -1,14 +1,55 @@
-﻿#include<stdio.h>
-#include<string.h>
+﻿#include<stdio.h>							   
 #include<stdlib.h>
 
+int menu();
+void InserirInicio(int num);
+void InserirFim(int num);
+void InserirMeio(int num, int posicao);
+int Remover(int num);
+void Listar();
 
-typedef struct PlaylistElements {
+struct PlaylistElements {
 	// elementos da playlist
 	char songname[200];
 	int songtime;
-};
+	struct PlaylistElements* next;
+} *Head;
 
+int  main() {
+	int op, num, pos, c;
+	Head = NULL;
+
+	while (1) {
+		op = menu();
+		switch (op) {
+		case 1:
+			printf("Digite o numero desejado: ");
+			scanf_s("%d", &num);
+			while ((c = getchar()) != '\n' && c != EOF) {} // limpando o buffer
+			InserirInicio(num);
+			break;
+		case 2:
+			int res;
+			printf("Digite o numero a ser removido: ");
+			scanf_s("%d", &num);
+			while ((c = getchar()) != '\n' && c != EOF) {} // limpando o buffer
+			res = Remover(num);
+			if (res == 1)
+				printf("Numero removido.");
+			else
+				printf("Numero nao encontrado.");
+			break;
+		case 3:
+			Listar();
+			break;
+		case 4:
+			return 0;
+		default:
+			printf("Invalido\n");
+		}
+	}
+	return 0;
+}
 
 int menu() {
 	int op, c;
@@ -28,77 +69,69 @@ int menu() {
 };
 
 
-struct PlaylistElements reqSongs() {
-	int c;
-	// temp structure
-	struct PlaylistElements tpe;
-	
-	//malloc(sizeof(PlaylistElements));
+void InserirInicio(int num)
+{
+	PlaylistElements* NewElement;
+	NewElement = (struct PlaylistElements*)malloc(sizeof(struct PlaylistElements));
+	NewElement->songtime = num;
 
-	printf("Enter song name: \n");
-	scanf_s("%s", &tpe.songname, 200);
-	while ((c = getchar()) != '\n' && c != EOF) {} // sempre limpe o buffer do teclado.
-
-	printf("Enter song time: \n");
-	scanf_s("%d", &tpe.songtime, 16);
-	while ((c = getchar()) != '\n' && c != EOF) {} // sempre limpe o buffer do teclado.
-
-	return tpe;
-};
-
-void listSongs(struct PlaylistElements tpe) {
-	printf(" Song name: %s \n", &tpe.songname);
-	printf(" Song time: %d \n", &tpe.songtime);
-};
+	if (Head == NULL)
+	{
+		Head = NewElement;
+		Head->next = NULL;
+	}
+	else
+	{
+		NewElement->next = Head;
+		Head = NewElement;
+	}
+}
 
 
-int main () {
-	
-	int op, c, i;
+int Remover(int num)
+{
+	PlaylistElements* ScanElement;
+	ScanElement = (struct PlaylistElements*)malloc(sizeof(struct PlaylistElements));
+	PlaylistElements* PrevPointer;
+	PrevPointer = (struct PlaylistElements*)malloc(sizeof(struct PlaylistElements));
 
-	//creating the struct array var
-	struct PlaylistElements playlist[6];
-	
+	ScanElement = Head;
+	while (ScanElement != NULL) {
+		if (ScanElement->songtime == num) {
+			if (ScanElement == Head) {
+				Head = ScanElement->next;
+				free(ScanElement);
+				return 1;
+			}
+			else {
+				PrevPointer->next = ScanElement->next;
+				free(ScanElement);
+				return 1;
+			}
+		}
+		else {
+			PrevPointer = ScanElement;
+			ScanElement = ScanElement->next;
+		}
+	}
+	return 0;
+}
 
-	while (1) {
+void Listar()
+{
+	PlaylistElements* ElementoVarredura;
+	ElementoVarredura = (struct PlaylistElements*)malloc(sizeof(struct PlaylistElements));
 
-		op = menu();
-		switch (op) {
+	ElementoVarredura = Head;
+	if (ElementoVarredura == NULL) {
+		return;
+	}
+	while (ElementoVarredura != NULL) {
+		printf("%d ", ElementoVarredura->songtime);
+		ElementoVarredura = ElementoVarredura->next;
+	}
+	printf("\n");
 
-		case 1:
-			// case para inserir musica
-			for (i = 0; i < 6; i++) {
-				printf("Enter the name of the song #%d\n", (i + 1));
-				playlist[i] = reqSongs();
-			};
-			
-
-			break;
-
-		case 2:
-			// case para remover
-
-			printf("Digite o numero da musica que deseja apagar: ");
-			scanf_s("%d", i);
-			playlist[i].songname = "";
-			playlist[i].songtime = 0;
-			
-
-
-			break;
-
-		case 3:
-			// lista as musicas
-			for (i = 0; i < 6; i++) {
-				printf("\n Song #%d : \n", (i + 1));
-				listSongs(playlist[i]);
-			};
-			system("PAUSE");
-			break;
-
-		case 4:
-			// fecha o loop
-			return 0;
-		}; // fim do Switch
-	}; // fim do while 1
-}; // fim da main
+	system("pause");
+	return;
+}
