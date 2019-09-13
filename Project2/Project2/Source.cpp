@@ -2,11 +2,11 @@
 #include<stdlib.h>
 
 int menu();
-void InserirInicio(int num);
+void InsertBegining(int num);
 void InserirFim(int num);
-void InserirMeio(int num, int posicao);
-int Remover(int num);
-void Listar();
+void InserirMeio(int num, int posipoint);
+int Remove(int num);
+void List();
 
 struct PlaylistElements {
 	// elementos da playlist
@@ -16,31 +16,37 @@ struct PlaylistElements {
 } *Head;
 
 int  main() {
-	int op, num, pos, c;
+	int op, num, c;	
 	Head = NULL;
+	/* I need a vector here that can collect the name and the time - check case 1
+	 this same Vector is gonna be used on the functions below, so we can treat them all using 1 vector rather than 2 variables for name and time */
 
 	while (1) {
 		op = menu();
 		switch (op) {
 		case 1:
-			printf("Digite o numero desejado: ");
+			printf("Digite o nome da musica: ");
+			// scanf_s("%s", &somethingsomething, 200)
+			while ((c = getchar()) != '\n' && c != EOF) {} // limpando o buffer
+			printf("Qual a duracao da musica em minutos?: ");
 			scanf_s("%d", &num);
 			while ((c = getchar()) != '\n' && c != EOF) {} // limpando o buffer
-			InserirInicio(num);
+			InsertBegining(num);
 			break;
 		case 2:
+			// I had a 
 			int res;
-			printf("Digite o numero a ser removido: ");
+			printf("Digite a posicao a ser removida: ");
 			scanf_s("%d", &num);
 			while ((c = getchar()) != '\n' && c != EOF) {} // limpando o buffer
-			res = Remover(num);
+			res = Remove(num);
 			if (res == 1)
-				printf("Numero removido.");
+				printf("musica removida.");
 			else
 				printf("Numero nao encontrado.");
 			break;
 		case 3:
-			Listar();
+			List();
 			break;
 		case 4:
 			return 0;
@@ -69,7 +75,7 @@ int menu() {
 };
 
 
-void InserirInicio(int num)
+void InsertBegining(int num)
 {
 	PlaylistElements* NewElement;
 	NewElement = (struct PlaylistElements*)malloc(sizeof(struct PlaylistElements));
@@ -88,8 +94,7 @@ void InserirInicio(int num)
 }
 
 
-int Remover(int num)
-{
+int Remove(int num) {
 	PlaylistElements* ScanElement;
 	ScanElement = (struct PlaylistElements*)malloc(sizeof(struct PlaylistElements));
 	PlaylistElements* PrevPointer;
@@ -113,12 +118,11 @@ int Remover(int num)
 			PrevPointer = ScanElement;
 			ScanElement = ScanElement->next;
 		}
-	}
+	} // fim if 1
 	return 0;
-}
+}// fim remove
 
-void Listar()
-{
+void List(){
 	PlaylistElements* ElementoVarredura;
 	ElementoVarredura = (struct PlaylistElements*)malloc(sizeof(struct PlaylistElements));
 
@@ -127,11 +131,12 @@ void Listar()
 		return;
 	}
 	while (ElementoVarredura != NULL) {
-		printf("%d ", ElementoVarredura->songtime);
+		printf("%d ", ElementoVarredura->songtime); // lista o tempo
+		printf("%s ", ElementoVarredura->songname); // lista os nomes
 		ElementoVarredura = ElementoVarredura->next;
-	}
+	} // fim while
 	printf("\n");
 
 	system("pause");
 	return;
-}
+}// fim List
