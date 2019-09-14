@@ -1,11 +1,16 @@
 ﻿  Source.cpp
-G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(10,2) : warning C4091: 'typedef ': ignored on left of 'PlaylistElements' when no variable is declared
-G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(23,21) : warning C4474: 'scanf_s' : too many arguments passed for format string
-G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(23,21) : message : placeholders and their parameters expect 1 variadic arguments, but 2 were provided
-G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(43,31) : warning C4474: 'scanf_s' : too many arguments passed for format string
-G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(43,31) : message : placeholders and their parameters expect 1 variadic arguments, but 2 were provided
-G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(51,9) : warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'int *'
-G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(82,12) : warning C4477: 'scanf_s' : format string '%d' requires an argument of type 'int *', but variadic argument 1 has type 'int'
-G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(86,11) : warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'int *'
-G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(57,10) : warning C4101: 'c': unreferenced local variable
-  Project2.vcxproj -> G:\Downloads\Uninter\materia\myprojects\Project2\Debug\Project2.exe
+G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(3,10) : warning C4067: unexpected tokens following preprocessor directive - expected a newline
+G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(23,13) : error C3861: 'add_song': identifier not found
+G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(26,13) : error C3861: 'remove_song': identifier not found
+G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(29,4) : error C3861: 'list_songs': identifier not found
+G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(49,21) : warning C4474: 'scanf_s' : too many arguments passed for format string
+G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(49,21) : message : placeholders and their parameters expect 1 variadic arguments, but 2 were provided
+G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(73,27) : warning C4474: 'scanf_s' : too many arguments passed for format string
+G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(73,27) : message : placeholders and their parameters expect 1 variadic arguments, but 2 were provided
+G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(87,38) : error C2440: 'initializing': cannot convert from 'void *' to 'Song *'
+G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(87,16) : message : Conversion from 'void*' to pointer to non-'void' requires an explicit cast
+G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(88,47) : error C2440: 'initializing': cannot convert from 'void *' to 'Element *'
+G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(88,22) : message : Conversion from 'void*' to pointer to non-'void' requires an explicit cast
+G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(93,34) : warning C4474: 'scanf_s' : too many arguments passed for format string
+G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(93,34) : message : placeholders and their parameters expect 1 variadic arguments, but 2 were provided
+G:\Downloads\Uninter\materia\myprojects\Project2\Project2\Source.cpp(94,22) : error C2065: 'list': undeclared identifier
